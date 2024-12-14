@@ -209,14 +209,19 @@ def handle_events():
             if event.key == pygame.K_ESCAPE:
                 return False
             elif event.key == pygame.K_1:
+                print("BLOCK SIZE 1")
                 block_size = 1
             elif event.key == pygame.K_2:
+                print("BLOCK SIZE 2")
                 block_size = 2
             elif event.key == pygame.K_3:
+                print("BLOCK SIZE 4")
                 block_size = 4
-            elif event.key == pygame.K_BACKQUOTE:
+            elif event.key == pygame.K_4:
+                print("RENDER RAY SINGLE MODE")
                 render_mode = RENDER_RAY_SINGLE
             elif event.key == pygame.K_BACKSLASH:
+                print("RENDER RAY RECORD MODE")
                 if render_mode != RENDER_RAY_RECORD:
                     # Start the recording!
                     record = []
@@ -225,8 +230,10 @@ def handle_events():
                     # End it and begin ray tracing each image
                     raytrace_records(record)
                     render_mode = RENDER_SOLID
+                    print("RENDER SOLID MODE 1")
                     animate = False
                     render_mode = RENDER_SOLID # So doesn't try to render it again!
+                    print("RENDER SOLID MODE 2")
             elif event.key == pygame.K_SPACE:
                 animate = not animate
             elif event.key == pygame.K_PERIOD:
