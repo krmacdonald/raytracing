@@ -113,14 +113,21 @@ def init_scene():
 
     wallmat = Material()
     wallmat.set_gold()
-    wall = BoxObj()
-    wall.name = "Wall"
-    wall.set_material(wallmat)
-    wall.translate(10, -2, 0)
-    wall.scale(10, .1, 10)
-    wall.rotate(90, Vector3(0, 0, 0))
-    scn.add_object(wall)
+    wall1 = BoxObj()
+    wall1.name = "Wall"
+    wall1.set_material(wallmat)
+    wall1.translate(10, 1, 0)
+    wall1.rotate(90, Vector3(0, 0, 1))
+    wall1.scale(4, .1, 10)
+    scn.add_object(wall1)
     
+    wall2 = BoxObj()
+    wall2.name = "Wall2"
+    wall2.set_material(wallmat)
+    wall2.translate(-10, 1, 0)
+    wall2.rotate(90, Vector3(0, 0, 1))
+    wall2.scale(4, .1, 10)
+    scn.add_object(wall2)
 
     # Light setup
     lightA = Light()
@@ -154,11 +161,13 @@ def display():
     if render_mode == RENDER_SOLID:
         scn.render_solid(nav.get_camera(), win)
         pygame.display.flip()
+        glDisable(GL_FOG)
     elif render_mode == RENDER_RAY_SINGLE:
         scn.render_solid(nav.get_camera(), win)   # Render solid first so user can see it
         pygame.display.flip()
         scn.render_ray_traced(nav.get_camera(), win, block_size)
         win.save_pixmap('image{0}.png'.format(raytrace_count))
+        glEnable(GL_FOG)
         raytrace_count+=1
         animate = False
         render_mode = RENDER_SOLID # So doesn't try to render it again!

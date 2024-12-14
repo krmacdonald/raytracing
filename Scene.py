@@ -48,6 +48,14 @@ class Scene:
         total_blocks = (width // block_size) * (height // block_size)
         completed_blocks = 0
 
+        glEnable(GL_FOG)
+        glFogi(GL_FOG_MODE, GL_LINEAR) 
+        glFogfv(GL_FOG_COLOR, [0.5, 0.5, 0.5, 1.0]) 
+        glFogf(GL_FOG_DENSITY, 0.35)  
+        glHint(GL_FOG_HINT, GL_DONT_CARE) 
+        glFogf(GL_FOG_START, 1.0)  
+        glFogf(GL_FOG_END, 20.0) 
+
         N = camera.near_dist
         H = N * math.tan(math.radians(camera.angle/2))
         W = H * camera.aspect_ratio
