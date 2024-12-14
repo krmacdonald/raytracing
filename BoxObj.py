@@ -85,7 +85,51 @@ class BoxObj(GeomObj):
         glPopMatrix()
 
     def local_intersect(self, ray, best_hit):
-        return False
+        t_min = -float('inf')
+        t_max = float('inf')
+
+        for i in range(3):
+            origin = getattr(ray.source, "xyz"[i])
+            direction = getattr(ray.dir, "dx dy dz".split()[i])
+            
+            if abs(direction) < 1e-6:
+                if not (-1 <= origin <= 1):
+                    return False
+            else:
+                t1 = (-1 - origin) / direction
+                t2 = (1 - origin) / direction
+                t_near, t_far = min(t1, t2), max(t1, t2)
+
+                t_min = max(t_min, t_near)
+                t_max = min(t_max, t_far)
+
+                if t_min > t_max:
+                    return False
+
+        if t_min > 0:
+            best_hit.t = t_min
+        else:
+            best_hit.t = t_max
+
+        best_hit.point = ray.eval(best_hit.t)
+        best_hit.norm = self.compute_normal(best_hit.point)
+        best_hit.obj = self
+        return True
 
     def compute_normal(self, point):
         normal = Vector3(0, 0, 0)
+        if abs(point.x - (-1)) < 1e-6:
+            normal.x = -1
+        elif abs(point.x - 1) < 1e-6:
+            normal.x = 1
+
+        if abs(point.y - (-1)) < 1e-6:
+            normal.y = -1
+        elif abs(point.y - 1) < 1e-6:
+            normal.y = 1
+
+        if abs(point.z - (-1)) < 1e-6:
+            normal.z = -1
+        elif abs(point.z - 1) < 1e-6:
+            normal.z = 1
+        return normal
