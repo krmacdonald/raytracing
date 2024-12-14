@@ -81,15 +81,7 @@ def init_scene():
     cam.set_lens_shape(init_view_angle, FRAME_WIDTH / FRAME_HEIGHT, init_near, init_far)
 
     # Create objects and add them to the scene
-    mat = Material()
-    mat.set_copper()
-    mat.set_reflectivity(0.1)
-    ball = SphereObj()
-    ball.set_material(mat)
-    ball.translate(0,1,0)
-    ball.scale(1, 2, 1)
-    ball.name = "Ball 1"
-    scn.add_object(ball)
+    
 
     mat = Material()
     mat.set_silver()
@@ -129,6 +121,32 @@ def init_scene():
     wall2.scale(4, .1, 10)
     scn.add_object(wall2)
 
+    wall3 = BoxObj()
+    wall3.name = "Wall3"
+    wall3.set_material(wallmat)
+    wall3.translate(0, 1, 10)
+    wall3.rotate(90, Vector3(1, 0, 0))
+    wall3. scale(10, .1, 4)
+    scn.add_object(wall3)
+
+    wall4 = BoxObj()
+    wall4.name = "wall4"
+    wall4.set_material(wallmat)
+    wall4.translate(0, 1, -10)
+    wall4.rotate(90, Vector3(1, 0, 0))
+    wall4.scale(10, .1, 4)
+    #scn.add_object(wall4)
+
+    mat = Material()
+    mat.set_copper()
+    mat.set_reflectivity(0.1)
+    ball = SphereObj()
+    ball.set_material(mat)
+    ball.translate(0,1,0)
+    ball.scale(1, 2, 1)
+    ball.name = "Ball 1"
+    scn.add_object(ball)
+    
     # Light setup
     lightA = Light()
     scn.add_light(lightA)

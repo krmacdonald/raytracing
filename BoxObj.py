@@ -103,7 +103,7 @@ class BoxObj(GeomObj):
                 t_min = max(t_min, t_near)
                 t_max = min(t_max, t_far)
 
-                if t_min > t_max:
+                if t_min < t_max:
                     return False
 
         if t_min > 0:

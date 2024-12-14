@@ -5,6 +5,7 @@ from Hit import Hit
 from Point3 import Point3
 from Vector3 import Vector3
 from OpenGL.GLU import *
+from OpenGL.GL import *
 
 class SphereObj(GeomObj):
     def __init__(self, resolution=100):
@@ -15,6 +16,7 @@ class SphereObj(GeomObj):
 
     def render_solid(self):
         gluSphere(self.ball, 1, self.resolution, self.resolution)
+
 
     def render_wire(self):
         print("Rendering wireframe sphere. Placeholder for rendering logic.")

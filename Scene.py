@@ -43,7 +43,7 @@ class Scene:
             obj.done_solid()
         glFlush()
 
-    def render_ray_traced(self, camera, window, block_size=1):
+    def render_ray_traced(self, camera, window, block_size=.01):
         width, height = window.width, window.height
         total_blocks = (width // block_size) * (height // block_size)
         completed_blocks = 0
